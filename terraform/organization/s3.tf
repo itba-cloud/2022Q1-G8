@@ -9,8 +9,8 @@ module "logs" {
     aws = aws.aws
   }
 
-  bucket_name = local.s3.logs.bucket_name
-  bucket_acl  = local.s3.logs.acl
+  bucket_name   = local.s3.logs.bucket_name
+  bucket_acl    = local.s3.logs.acl
   force_destroy = true
 }
 
@@ -22,9 +22,9 @@ module "website" {
     aws = aws.aws
   }
 
-  bucket_name = each.value.bucket_name
+  bucket_name   = each.value.bucket_name
   force_destroy = true
-  website     = try(each.value.website, null)
+  website       = try(each.value.website, null)
   logging = {
     target_bucket = module.logs.bucket_id
     target_prefix = "log/"
