@@ -32,16 +32,6 @@ module "website" {
   objects = try(each.value.objects, {})
 }
 
-# resource "aws_s3_object" "this" {
-#   provider = aws.aws
-
-#   bucket        = module.s3["website"].id
-#   key           = "index.html"
-#   content       = data.template_file.userdata.rendered
-#   content_type  = "text/html"
-#   storage_class = "STANDARD"
-# }
-
 # 1 - S3 bucket
 resource "aws_s3_bucket" "reports_bucket" {
   provider = aws.aws
@@ -61,14 +51,6 @@ resource "aws_s3_bucket_lifecycle_configuration" "reports_bucket_lifecycle" {
 
   rule {
     id = "lifecycle-rule-id"
-
-    # prefix = "log/"
-
-    # tags = {
-    #   rule      = "log"
-    #   autoclean = "true"
-    # }
-
     status = "Enabled"
 
     transition {
@@ -104,20 +86,3 @@ resource "aws_s3_bucket_public_access_block" "reports_bucket_pab" {
   restrict_public_buckets = true
   ignore_public_acls      = true
 }
-
-
-# # 2 -Bucket policy
-# resource "aws_s3_bucket_policy" "reports_bucket_policy" {
-#   # count = var.objects != {} ? 1 : 0
-
-#   bucket = aws_s3_bucket.this.id
-#   policy = data.aws_iam_policy_document.this.json
-# }
-
-
-# Another way to use it, is to directly pass the following arguments to the resource
-
-# templatefile("../../resources/html/index.html",
-#   {
-#     ENDPOINT = aws_api_gateway_rest_api.this.arn
-#   })

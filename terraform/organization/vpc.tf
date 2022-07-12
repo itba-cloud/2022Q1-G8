@@ -9,7 +9,6 @@ module "lambda_vpc" {
   vpc_cidr_block            = local.vpc_cidr_block
   vpc_private_subnet_name   = local.vpc_private_subnet_name
   private_subnet_cidr_block = local.private_subnet_cidr_block
-
 }
 
 resource "aws_vpc_endpoint" "this" {

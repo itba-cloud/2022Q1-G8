@@ -2,7 +2,7 @@ module "sns" {
   for_each = local.sns_topics
   source   = "../modules/sns"
 
-   providers = {
+  providers = {
     aws = aws.aws
   }
 
