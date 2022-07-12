@@ -44,6 +44,8 @@ module "website" {
 
 # 1 - S3 bucket
 resource "aws_s3_bucket" "reports_bucket" {
+  provider = aws.aws
+
   bucket              = "reports-grupo8-2022-1c"
   object_lock_enabled = false
 
@@ -53,6 +55,8 @@ resource "aws_s3_bucket" "reports_bucket" {
 }
 
 resource "aws_s3_bucket_lifecycle_configuration" "reports_bucket_lifecycle" {
+  provider = aws.aws
+
   bucket = aws_s3_bucket.reports_bucket.id
 
   rule {
@@ -84,11 +88,15 @@ resource "aws_s3_bucket_lifecycle_configuration" "reports_bucket_lifecycle" {
 }
 
 resource "aws_s3_bucket_acl" "reports_bucket_acl" {
+  provider = aws.aws
+
   bucket = aws_s3_bucket.reports_bucket.id
   acl    = "private"
 }
 
 resource "aws_s3_bucket_public_access_block" "reports_bucket_pab" {
+  provider = aws.aws
+
   bucket = aws_s3_bucket.reports_bucket.id
 
   block_public_acls       = true
