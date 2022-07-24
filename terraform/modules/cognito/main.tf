@@ -1,5 +1,4 @@
-
-resource "aws_cognito_user_pool" "cognito_pool" {
+resource "aws_cognito_user_pool" "this" {
   name = var.pool_name
 
   password_policy {

@@ -6,11 +6,8 @@ module "dynamodb" {
   }
 
   table_name = "Positions"
-
   read_capacity = 5
-
   write_capacity = 5
-
   hash_key = "position_id"
 
   attribute = {
